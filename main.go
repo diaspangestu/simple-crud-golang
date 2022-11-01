@@ -22,6 +22,7 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
+	PORT := os.Getenv("PORT")
 	db := database.NewDB()
 	validate := validator.New()
 
@@ -32,7 +33,7 @@ func main() {
 	route := router.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr:    "/" + os.Getenv("PORT"),
+		Addr:    "/" + PORT,
 		Handler: middleware.NewAuthMiddleware(route),
 	}
 
