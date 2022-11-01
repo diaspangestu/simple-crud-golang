@@ -10,10 +10,18 @@ import (
 	"belajar-golang-restful-api/services"
 	"github.com/go-playground/validator"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
+	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	db := database.NewDB()
 	validate := validator.New()
 
@@ -24,10 +32,10 @@ func main() {
 	route := router.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr:    "localhost:8080",
+		Addr:    os.Getenv("MYSQLHOST") + os.Getenv("PORT"),
 		Handler: middleware.NewAuthMiddleware(route),
 	}
 
-	err := server.ListenAndServe()
+	err = server.ListenAndServe()
 	helper.PanicError(err)
 }

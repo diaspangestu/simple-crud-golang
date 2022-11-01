@@ -3,11 +3,22 @@ package database
 import (
 	"belajar-golang-restful-api/helper"
 	"database/sql"
+	"fmt"
+	"os"
 	"time"
 )
 
+var (
+	HOST     = os.Getenv("MYSQLHOST")
+	USER     = os.Getenv("MYSQLUSER")
+	PASSWORD = os.Getenv("MYSQLPASSWORD")
+	DBPORT   = os.Getenv("MYSQLPORT")
+	DBNAME   = os.Getenv("MYSQLDATABASE")
+)
+
 func NewDB() *sql.DB {
-	db, err := sql.Open("mysql", "root:veronica123@tcp(localhost:3306)/belajar_golang_restful_api")
+	config := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", USER, PASSWORD, HOST, DBPORT, DBNAME)
+	db, err := sql.Open("mysql", config)
 	helper.PanicError(err)
 
 	db.SetMaxIdleConns(5)
