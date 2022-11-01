@@ -31,6 +31,6 @@ func main() {
 		Handler: middleware.NewAuthMiddleware(route),
 	}
 
-	err = server.ListenAndServe()
+	err := server.ListenAndServe()
 	helper.PanicError(err)
 }
