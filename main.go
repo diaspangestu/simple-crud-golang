@@ -27,7 +27,7 @@ func main() {
 	route := router.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr:    "/" + PORT,
+		Addr:    "/:" + PORT,
 		Handler: middleware.NewAuthMiddleware(route),
 	}
 
