@@ -17,7 +17,6 @@ import (
 
 func main() {
 	PORT := os.Getenv("PORT")
-	HOST := os.Getenv("MYSQLHOST")
 	db := database.NewDB()
 	validate := validator.New()
 
@@ -28,7 +27,7 @@ func main() {
 	route := router.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr:    HOST + ":" + PORT,
+		Addr:    "localhost:" + PORT,
 		Handler: middleware.NewAuthMiddleware(route),
 	}
 
