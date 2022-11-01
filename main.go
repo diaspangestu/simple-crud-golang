@@ -8,6 +8,7 @@ import (
 	"belajar-golang-restful-api/repository"
 	"belajar-golang-restful-api/router"
 	"belajar-golang-restful-api/services"
+	"fmt"
 	"github.com/go-playground/validator"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -32,7 +33,7 @@ func main() {
 	route := router.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr:    os.Getenv("MYSQLHOST") + os.Getenv("MYSQLPORT"),
+		Addr:    fmt.Sprintf("%s:%s", os.Getenv("MYSQLHOST"), os.Getenv("port")),
 		Handler: middleware.NewAuthMiddleware(route),
 	}
 
