@@ -32,7 +32,7 @@ func main() {
 	route := router.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr:    os.Getenv("MYSQLHOST") + os.Getenv("PORT"),
+		Addr:    os.Getenv("MYSQLHOST") + os.Getenv("MYSQLPORT"),
 		Handler: middleware.NewAuthMiddleware(route),
 	}
 
