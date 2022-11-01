@@ -17,7 +17,7 @@ var (
 )
 
 func NewDB() *sql.DB {
-	config := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", USER, PASSWORD, HOST, DBPORT, DBNAME)
+	config := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v", USER, PASSWORD, HOST, DBPORT, DBNAME)
 	db, err := sql.Open("mysql", config)
 	helper.PanicError(err)
 
